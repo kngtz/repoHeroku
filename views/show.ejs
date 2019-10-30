@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
+    />
+    <link rel="stylesheet" href="/css/app.css" />
+    <meta charset="utf-8" />
+    <title>Budgtr</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1><%= budgetChose.name%></h1>
+      <button onclick="location.href='/budgets'" type="button">
+        Back
+      </button>
+      <% var keys = Object.keys(budgetChose); %> 
+      <% var values =Object.values(budgetChose); %> 
+      <% for (i=0;i<keys.length;i++) {%>
+      <ul>
+        <%= keys[i] %>
+        <li><%= values[i] %></li>
+      </ul>
+      <% } %>
+    </div>
+  </body>
+</html>

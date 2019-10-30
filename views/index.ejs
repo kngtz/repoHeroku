@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
+    />
+    <link rel="stylesheet" href="/css/app.css" />
+    <meta charset="utf-8" />
+    <title>Budgtr</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Budgtr ALL</h1>
+      <% var totalAmount = 0 ; for(let i = 0; i < allBudgets.length; i++) { %>
+      <%totalAmount +=allBudgets[i].amount%> <% } %>
+      <h4 id="total">Total amount = $ <%= totalAmount %></h4>
+      <table>
+        <% for(let i = 0; i < allBudgets.length; i++) { %>
+        <tr>
+          <td><%=allBudgets[i].date%></td>
+          <td><a href="/budgets/<%=i%>"><%=allBudgets[i].name %></a></td>
+          <td>$ <%=allBudgets[i].amount%></td>
+        </tr>
+        <% } %>
+      </table>
+
+      <% if (totalAmount < 0){ %>
+      <style>
+        #total {
+          background-color: red;
+        }
+      </style>
+      <% } else if (totalAmount > 1000) { %>
+      <style>
+        #total {
+          background-color: green;
+        }
+      </style>
+      <% } %>
+      <button onclick="location.href='/budgets/new'" type="button">
+        Create New Item
+      </button>
+    </div>
+  </body>
+</html>
