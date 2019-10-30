@@ -2,7 +2,7 @@
   "name": "budgtr",
   "version": "1.0.0",
   "engines": {
-    "node": "10.11.0"
+    "node": "10.11.0",
   "description": "[![General Assembly Logo](/ga_cog.png)](https://generalassemb.ly)",
   "main": "server.js",
   "dependencies": {
