@@ -12,13 +12,13 @@ app.use(methodOverride("_method"));
 
 // Routes
 app.use("/goods", goodsController);
-app.use("/user", userController);
+app.use("/users", userController);
 
 app.get("/", (req, res) => {
   res.redirect("/goods");
 });
-app.get("/user", (req, res) => {
-  res.redirect("/user");
+app.get("/users", (req, res) => {
+  res.redirect("/users");
 });
 app.listen(3000, () => {
   console.log("listening...");
