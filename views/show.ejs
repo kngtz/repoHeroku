@@ -1,32 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
-    />
-    <link rel="stylesheet" href="/css/app.css" />
     <meta charset="utf-8" />
-    <title>Budgtr</title>
+    <title></title>
   </head>
   <body>
-    <div class="container">
-      <h1><%= budgetChose.name%></h1>
-      <button onclick="location.href='/budgets'" type="button">
-        Back
-      </button>
-      <% var keys = Object.keys(budgetChose); %> 
-      <% var values =Object.values(budgetChose); %> 
-      <% for (i=0;i<keys.length;i++) {%>
-      <ul>
-        <%= keys[i] %>
-        <li><%= values[i] %></li>
-      </ul>
-      <% } %>
-    </div>
+    <h1>good Show Page</h1>
+    The <%=good.name;%> costs $<%=good.price; %> each. <% if(good.qty > 0){ %>
+    Remaining stock = <%= good.qty %> <% } else { %> Out of stock <% } %>
+
+    <form form action="/goods/<%=good.id; %>?_method=DELETE" method="POST">
+      <input type="submit" value="DELETE" />
+    </form>
+
+    <% if (good.qty > 0) {%>
+    <form action="/goods/<%=good.id%>/buy?_method=put" method="POST">
+      <button class="buy-button">Buy</button>
+    </form>
+    <%}%>
+
+    <a href="/goods/<%=good.id; %>/edit">Edit</a>
+
+    <nav>
+      <a href="/goods">Back to goods Index</a>
+    </nav>
   </body>
 </html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <h1>user Show Page</h1>
+    <%= sUser.username %> has the following items: <br />
+    <% for (i=0;i < sUser.shopping_cart.length;i++) { %> <%=
+    sUser.shopping_cart[i].name %> <br />
+    <%=sUser.shopping_cart[i].description %> <br />
+    <%=sUser.shopping_cart[i].img %> <%=sUser.shopping_cart[i].price %> <br />
+    <%=sUser.shopping_cart[i].qty %> <%}%> <br />
+  </body>
+</html>

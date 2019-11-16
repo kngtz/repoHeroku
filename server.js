@@ -1,36 +1,31 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 
-const budget = require("./models/budget.js");
+const goodsController = require("./controllers/goods.js");
+const userController = require("./controllers/user.js");
 
-// Allow use of Heroku's port or your own local port, depending on the environment
-const PORT = process.env.PORT || 3000;
-
+// Middleware
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method"));
 
-app.use(express.static("public"));
+// Routes
+app.use("/goods", goodsController);
+app.use("/user", userController);
 
-app.post("/budgets", (req, res) => {
-  budget.push(req.body);
-  res.redirect("/budgets");
+app.get("/", (req, res) => {
+  res.redirect("/goods");
 });
-
-app.get("/budgets/", (request, response) => {
-  response.render("index.ejs", {
-    allBudgets: budget
-  });
+app.get("/user", (req, res) => {
+  res.redirect("/user");
 });
-
-app.get("/budgets/new", (req, res) => {
-  res.render("new.ejs");
-});
-
-app.get("/budgets/:index", (request, response) => {
-  response.render("show.ejs", {
-    budgetChose: budget[request.params.index]
-  });
-});
-
-app.listen(PORT, () => {
+app.listen(3000, () => {
   console.log("listening...");
+});
+mongoose.connect("mongodb://localhost:27017/basiccrud", {
+  useNewUrlParser: true
+});
+mongoose.connection.once("open", () => {
+  console.log("connected to mongo");
 });

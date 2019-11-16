@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <h1>Edit good Page</h1>
+    <form action="/goods/<%=good.id%>?_method=PUT" method="POST">
+      <!--  NOTE: the form is pre-populated with values for the server-->
+      Name: <input type="text" name="name" value="<%=good.name%>" /><br />
+      Price: <input type="text" name="price" value="<%=good.price%>" /><br />
+      Quantity: <input type="text" name="qty" value="<%=good.qty%>" /><br />
+
+      <input type="submit" name="" value="Submit Changes" />
+    </form>
+  </body>
+</html>
