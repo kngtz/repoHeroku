@@ -7,7 +7,7 @@ const postsSchema = new mongoose.Schema({
   sub: String,
   img: String,
   content: String,
-  comments: Number,
+  comments: [],
   likes: Number
 });
 
