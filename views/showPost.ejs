@@ -15,7 +15,7 @@
     <%= post.poster %> <br />
     <%= post.title %> <br />
     <%= post.sub %> <br />
-    <%= post.img %> <br />
+    <img src="<%= post.img %>" alt="post image" /> <br />
     <%= post.content %> <br />
     <%= post.comments %> <br />
     <%= post.likes %> <br />
@@ -23,6 +23,18 @@
 
   <a href="/posts/<%=post.id; %>/edit">Edit</a>
 
+  <form form action="/posts/<%=post.id%>comment?_method=PUT" method="POST">
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Comment</label>
+      <textarea
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"
+        name="comments"
+      ></textarea>
+    </div>
+    <input type="submit" name="" value="Submit Comment" />
+  </form>
   <nav>
     <a href="/posts">Back to posts Index</a>
   </nav>

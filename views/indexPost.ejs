@@ -19,14 +19,31 @@
     <h1>Post index page</h1>
     <a href="/posts/new">Create a New post</a>
     
+      
+    
       <% for(let i = posts.length-1; i >= 0 ; i--){ %>
-      <li>
-        <a href="/posts/<%=posts[i].id;%>">
-          <%=posts[i].poster; %>
-        </a>
-      </li>
-      <% } %>
-    
-    
+      <div class="container">
+          <div class="row">
+            <div class="col-xl-">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6 class="card-title ">
+                    <a href="#"><%=posts[i].sub; %></a><span class="text-muted"> posted by <a href="/posts/<%=posts[i].id;%>">
+                      <%=posts[i].poster; %>
+                    </a></span>
+                  </h6>
+                  <h4 class="card-subtitle"><%=posts[i].title; %></h4>
+                  <p class="card-text">
+                      <%=posts[i].content; %>
+                  </p>
+                  <a href="#"
+                    ><img class="card-img-top" src="<%=posts[i].img; %>" alt=""
+                  /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
   </body>
 </html>

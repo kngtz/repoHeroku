@@ -12,8 +12,9 @@ router.get("/json", (req, res) => {
 router.get("/seed", (req, res) => {
   user.create(
     {
-      username: "Tommy",
-      shopping_cart: []
+      username: "PocklePickle",
+      posts: [],
+      subs: []
     },
     (error, data) => {
       res.redirect("/");
