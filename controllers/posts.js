@@ -40,7 +40,8 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
   post.find({}, (error, allPosts) => {
     res.render("indexPost.ejs", {
-      posts: allPosts
+      posts: allPosts,
+      currentUser: req.session.currentUser
     });
   });
 });
@@ -49,7 +50,7 @@ router.get("/:id/edit", (req, res) => {
   post.findById(req.params.id, (err, selectedPost) => {
     //find the good
     res.render("editPost.ejs", {
-      post: selectedPost //pass in found good
+      post: selectedPost //pass in selected post
     });
   });
 });
@@ -62,7 +63,7 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   post.findByIdAndRemove(req.params.id, (err, data) => {
-    res.redirect("/posts"); //redirect back to goods index
+    res.redirect("/posts");
   });
 });
 
@@ -75,20 +76,8 @@ router.get("/:id", (req, res) => {
 });
 
 router.put("/:id/comment", (req, res) => {
-  good.findByIdAndUpdate(req.params.id, { $inc: { qty: -1 } }, (err, good) => {
-    if (err) {
-      console.log(err);
-    }
-    user.findOneAndUpdate(
-      {},
-      { $push: { shopping_cart: good } },
-      (err, good) => {
-        if (err) {
-          console.log(err);
-        }
-        res.redirect("/");
-      }
-    );
+  post.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
+    res.redirect("/posts");
   });
 });
 

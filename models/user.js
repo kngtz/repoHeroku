@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
   username: String,
+  password: String,
   posts: Array,
   subs: Array
 });
