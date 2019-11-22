@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const postsSchema = new mongoose.Schema({
-  poster: String,
+const postsSchema = new Schema({
+  poster: { type: Schema.Types.ObjectId, ref: "user" },
   title: String,
   sub: String,
   img: String,

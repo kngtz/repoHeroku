@@ -28,7 +28,13 @@ router.get("/seed", (req, res) => {
 });
 
 router.get("/new", (req, res) => {
-  res.render("newPost.ejs");
+  if (req.session.currentUser) {
+    res.render("newPost.ejs", {
+      currentUser: req.session.currentUser
+    });
+  } else {
+    res.redirect("/sessions/new");
+  }
 });
 
 router.post("/", (req, res) => {
@@ -48,8 +54,8 @@ router.get("/", (req, res) => {
 
 router.get("/:id/edit", (req, res) => {
   post.findById(req.params.id, (err, selectedPost) => {
-    //find the good
     res.render("editPost.ejs", {
+      currentUser: req.session.currentUser,
       post: selectedPost //pass in selected post
     });
   });
@@ -70,6 +76,7 @@ router.delete("/:id", (req, res) => {
 router.get("/:id", (req, res) => {
   post.findById(req.params.id, (err, selectedPost) => {
     res.render("showPost.ejs", {
+      currentUser: req.session.currentUser,
       post: selectedPost
     });
   });
@@ -77,7 +84,12 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id/comment", (req, res) => {
   post.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
-    res.redirect("/posts");
+    {
+      $push: {
+        comments: "welcome to the new comment";
+      }
+    }
+    res.redirect("/posts/");
   });
 });
 

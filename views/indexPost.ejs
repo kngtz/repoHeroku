@@ -17,16 +17,14 @@
           <input type="submit" value="Logout" class="waves-effect waves-light btn"/>
       </form>
       </h1>
-      <h2>
-        <a class="waves-effect waves-light btn" href="/app">Join the Party</a>
-      </h2>
+      
       <% } else { %>
         <h2>Please </h2>
         <a class="waves-effect waves-light btn" href="/users/new">Sign Up</a></h2>
         <h3>or</h3>
         <a class="waves-effect waves-light btn" href="/sessions/new">Log In</a>
       <% } %>
-    </div>
+    
     
   <body>
     <h1>Post index page</h1>
@@ -35,7 +33,7 @@
       
     
       <% for(let i = posts.length-1; i >= 0 ; i--){ %>
-      <div class="container">
+      <div class="container " >
           <div class="row">
             <div class="col-xl-">
               <div class="card h-100">
@@ -50,7 +48,7 @@
                       <%=posts[i].content; %>
                   </p>
                   <a href="#"
-                    ><img class="card-img-top" src="<%=posts[i].img; %>" alt=""
+                    ><a href="/posts/<%=posts[i].id;%>"><img class="card-img-top w-50 " src="<%=posts[i].img; %>" alt=""
                   /></a>
                 </div>
               </div>

@@ -41,7 +41,9 @@ app.get("/posts", (req, res) => {
 });
 app.get("/app", (req, res) => {
   if (req.session.currentUser) {
-    res.render("app/index.ejs");
+    res.render("app/index.ejs", {
+      currentUser: req.session.currentUser
+    });
   } else {
     res.redirect("/sessions/new");
   }

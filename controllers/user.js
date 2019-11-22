@@ -27,6 +27,7 @@ router.get("/seed", (req, res) => {
 router.get("/", (req, res) => {
   user.find({}, (error, allusers) => {
     res.render("indexUser.ejs", {
+      currentUser: req.session.currentUser,
       users: allusers
     });
   });
@@ -38,6 +39,7 @@ router.get("/new", (req, res) => {
 router.get("/:id", (req, res) => {
   user.findById(req.params.id, (err, selectedUser) => {
     res.render("showUser.ejs", {
+      currentUser: req.session.currentUser,
       sUser: selectedUser
     });
   });
