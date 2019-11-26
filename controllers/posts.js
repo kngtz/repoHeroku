@@ -44,12 +44,15 @@ router.post("/", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  post.find({}, (error, allPosts) => {
-    res.render("indexPost.ejs", {
-      posts: allPosts,
-      currentUser: req.session.currentUser
+  post
+    .find({})
+    .populate("poster")
+    .exec((error, allPosts) => {
+      res.render("indexPost.ejs", {
+        posts: allPosts,
+        currentUser: req.session.currentUser
+      });
     });
-  });
 });
 
 router.get("/:id/edit", (req, res) => {
