@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Gaddit</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -25,12 +25,29 @@
       <% } %>
   </head>
   <body>
-    <h1>User Show Page</h1>
-    <%= sUser.username %> has the following items: <br />
-    <% for (i=0;i < sUser.shopping_cart.length;i++) { %> <%=
-    sUser.shopping_cart[i].name %> <br />
-    <%=sUser.shopping_cart[i].description %> <br />
-    <%=sUser.shopping_cart[i].img %> <%=sUser.shopping_cart[i].price %> <br />
-    <%=sUser.shopping_cart[i].qty %> <%}%> <br />
+    <% for(let i = posts.length-1; i >= 0 ; i--){ %>
+      <div class="container " >
+          <div class="row">
+            <div class="col-xl-">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6 class="card-title ">
+                    <a href="#"><%=posts[i].sub; %></a><span class="text-muted"> posted by <a href="/posts/<%=posts[i].id;%>">
+                      <%=posts[i].poster.username; %>
+                    </a></span>
+                  </h6>
+                  <h4 class="card-subtitle"><%=posts[i].title; %></h4>
+                  <p class="card-text">
+                      <%=posts[i].content; %>
+                  </p>
+                  <a href="#"
+                    ><a href="/posts/<%=posts[i].id;%>"><img class="card-img-top" style="max-width: 40%;" src="<%=posts[i].img; %>" alt=""
+                  /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
   </body>
 </html>

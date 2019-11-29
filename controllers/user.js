@@ -40,7 +40,8 @@ router.get("/:id", (req, res) => {
   user.findById(req.params.id, (err, selectedUser) => {
     res.render("showUser.ejs", {
       currentUser: req.session.currentUser,
-      sUser: selectedUser
+      sUser: selectedUser,
+      post: post
     });
   });
 });

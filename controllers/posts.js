@@ -43,6 +43,24 @@ router.post("/", (req, res) => {
   });
 });
 
+router.put("/:id/buy", (req, res) => {
+  good.findByIdAndUpdate(req.params.id, { $inc: { qty: -1 } }, (err, good) => {
+    if (err) {
+      console.log(err);
+    }
+    user.findOneAndUpdate(
+      {},
+      { $push: { shopping_cart: good } },
+      (err, good) => {
+        if (err) {
+          console.log(err);
+        }
+        res.redirect("/");
+      }
+    );
+  });
+});
+
 router.get("/", (req, res) => {
   post
     .find({})
@@ -56,12 +74,19 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id/edit", (req, res) => {
-  post.findById(req.params.id, (err, selectedPost) => {
-    res.render("editPost.ejs", {
-      currentUser: req.session.currentUser,
-      post: selectedPost //pass in selected post
+  post
+    .findById(req.params.id)
+    .populate("poster")
+    .exec((err, selectedPost) => {
+      if (req.session.currentUser.username === selectedPost.poster.username) {
+        res.render("editPost.ejs", {
+          currentUser: req.session.currentUser,
+          post: selectedPost
+        });
+      } else {
+        res.redirect("/");
+      }
     });
-  });
 });
 
 router.put("/:id", (req, res) => {
@@ -71,28 +96,32 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  post.findByIdAndRemove(req.params.id, (err, data) => {
-    res.redirect("/posts");
-  });
+  if (req.session.currentUser)
+    post.findByIdAndRemove(req.params.id, (err, data) => {
+      res.redirect("/posts");
+    });
 });
 
 router.get("/:id", (req, res) => {
-  post.findById(req.params.id, (err, selectedPost) => {
-    res.render("showPost.ejs", {
-      currentUser: req.session.currentUser,
-      post: selectedPost
+  post
+    .findById(req.params.id)
+    .populate("poster")
+    .exec((err, selectedPost) => {
+      res.render("showPost.ejs", {
+        currentUser: req.session.currentUser,
+        post: selectedPost //pass in selected post
+      });
     });
-  });
 });
 
 router.put("/:id/comment", (req, res) => {
-  post.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
+  post.findByIdAndUpdate(req.params.id, req.body, (err, newComment) => {
     {
       $push: {
-        comments: "welcome to the new comment";
+        comments: newComment;
       }
     }
-    res.redirect("/posts/");
+    res.redirect("/posts");
   });
 });
 
