@@ -25,23 +25,23 @@
       <% } %>
   </head>
   <body>
-    <% for(let i = posts.length-1; i >= 0 ; i--){ %>
+    <% for(let i = user.posts.length-1; i >= 0 ; i--){ %>
       <div class="container " >
           <div class="row">
             <div class="col-xl-">
               <div class="card h-100">
                 <div class="card-body">
                   <h6 class="card-title ">
-                    <a href="#"><%=posts[i].sub; %></a><span class="text-muted"> posted by <a href="/posts/<%=posts[i].id;%>">
-                      <%=posts[i].poster.username; %>
+                    <a href="#"><%=user.posts[i].sub; %></a><span class="text-muted"> posted by <a href="/posts/<%=posts[i].id;%>">
+                      <%=user.posts[i].poster.username; %>
                     </a></span>
                   </h6>
-                  <h4 class="card-subtitle"><%=posts[i].title; %></h4>
+                  <h4 class="card-subtitle"><%=user.posts[i].title; %></h4>
                   <p class="card-text">
-                      <%=posts[i].content; %>
+                      <%=user.posts[i].content; %>
                   </p>
                   <a href="#"
-                    ><a href="/posts/<%=posts[i].id;%>"><img class="card-img-top" style="max-width: 40%;" src="<%=posts[i].img; %>" alt=""
+                    ><a href="/posts/<%=user.posts[i].id;%>"><img class="card-img-top" style="max-width: 40%;" src="<%=user.posts[i].img; %>" alt=""
                   /></a>
                 </div>
               </div>

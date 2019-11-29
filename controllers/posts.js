@@ -39,22 +39,10 @@ router.get("/new", (req, res) => {
 
 router.post("/", (req, res) => {
   post.create(req.body, (error, createdPost) => {
-    res.redirect("/posts");
-  });
-});
-
-router.put("/:id/buy", (req, res) => {
-  good.findByIdAndUpdate(req.params.id, { $inc: { qty: -1 } }, (err, good) => {
-    if (err) {
-      console.log(err);
-    }
-    user.findOneAndUpdate(
-      {},
-      { $push: { shopping_cart: good } },
-      (err, good) => {
-        if (err) {
-          console.log(err);
-        }
+    user.findByIdAndUpdate(
+      req.session.currentUser,
+      { $push: { posts: createdPost._id } },
+      (err, updatedPostArray) => {
         res.redirect("/");
       }
     );

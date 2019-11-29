@@ -46,6 +46,18 @@ router.get("/:id", (req, res) => {
   });
 });
 
+router.get("/:id", (req, res) => {
+  user
+    .findById(req.params.id)
+    .populate("posts")
+    .exec((err, selectedUser) => {
+      res.render("showUser.ejs", {
+        currentUser: req.session.currentUser,
+        user: selectedUser //pass in selected post
+      });
+    });
+});
+
 router.post("/", (req, res) => {
   //overwrite the user password with the hashed password, then pass that in to our database
   req.body.password = bcrypt.hashSync(
