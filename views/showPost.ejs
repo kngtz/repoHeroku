@@ -3,65 +3,63 @@
   <head>
     <meta charset="utf-8" />
     <title>Gaddit</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
-    <h1>
-      <% if(currentUser) { %>
-        Welcome <%=currentUser.username%>!
-        <form action="/sessions?_method=DELETE" method="POST">
-          <input type="submit" value="Logout" class="waves-effect waves-light btn"/>
-      </form>
-      </h1>
-      
-      <% } else { %>
-        <h2>Please </h2>
-        <a class="waves-effect waves-light btn" href="/users/new">Sign Up</a></h2>
-        <h3>or</h3>
-        <a class="waves-effect waves-light btn" href="/sessions/new">Log In</a>
-      <% } %>
+
+    <%- include('partials/head.ejs') %>
   </head>
   <body>
     <h1>Post Show Page</h1>
-    <%= post.poster.username %> <br />
-    <%= post.title %> <br />
-    <%= post.sub %> <br />
-    <img src="<%= post.img %>" alt="post image" /> <br />
-    <%= post.content %> <br />
-    <% for (i=0;i< post.comments.length;i++) { %> <%= post.comments[i] %> <br />
-    <%}%> <%= post.likes %> <br />
-  </body>
 
-  <h5>
-    <% if( currentUser) { %>
-      <% if(currentUser.username === post.poster.username) { %>
-        <a href="/posts/<%=post.id; %>/edit">Edit</a>
-        <form form action="/posts/<%=post.id; %>?_method=DELETE" method="POST">
-          <input type="submit" value="DELETE" />
-        </form>
-      </h1>
-    
-    <% } %>
-    <% } %>
-    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="container ">
+            posted by
+            <a href="/users/<%=post.poster._id;%>">
+              <%=post.poster.username; %> </a
+            ><br />
+            <%= post.title %> <br />
+            <%= post.sub %> <br />
+            <img src="<%= post.img %>" alt="post image" class="card-img-top" />
+            <br />
+            <%= post.content %> <br />
+            <% for (i=0;i< post.comments.length;i++) { %> <%= post.comments[i]
+            %> <br />
+            <%}%> <%= post.likes %> <br />
 
-  
+            <% if( currentUser) { %> <% if(currentUser.username ===
+            post.poster.username) { %>
+            <a href="/posts/<%=post.id; %>/edit">Edit</a>
+            <form
+              form
+              action="/posts/<%=post.id; %>?_method=DELETE"
+              method="POST"
+            >
+              <input type="submit" value="DELETE" />
+            </form>
 
-  <form form action="/posts/<%=post.id%>/comment?_method=PUT" method="POST">
-    <div class="form-group">
-      <label for="exampleFormControlTextarea1">Comment</label>
-      <textarea
-        class="form-control"
-        rows="3"
-        name="newComments"
-      ></textarea>
+            <% } %> <% } %>
+
+            <form
+              form
+              action="/posts/<%=post.id%>/comment?_method=PUT"
+              method="POST"
+            >
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Comment</label>
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  name="newComments"
+                ></textarea>
+              </div>
+              <input type="submit" name="" value="Submit Comment" />
+            </form>
+          </div>
+        </div>
+        <%- include('partials/sidebar.ejs') %>
+      </div>
+      <!-- /.row -->
     </div>
-    <input type="submit" name="" value="Submit Comment" />
-  </form>
-  <nav>
-    <a href="/posts">Back to posts Index</a>
-  </nav>
+    <!-- /.container -->
+  </body>
 </html>
